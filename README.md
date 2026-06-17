@@ -8,10 +8,10 @@
 
 <p align="center">
 
-![Python](https://img.shields.io/badge/Python-EDA-8B0000)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Analytics-A52A2A)
-![Tableau](https://img.shields.io/badge/Tableau-Dashboard-B22222)
-![Domain](https://img.shields.io/badge/Domain-Fraud%20Analytics-DC143C)
+![Python](https://img.shields.io/badge/Python-EDA-8B0000?style=for-the-badge)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Analytics-A52A2A?style=for-the-badge)
+![Tableau](https://img.shields.io/badge/Tableau-Dashboard-B22222?style=for-the-badge)
+![Fraud Analytics](https://img.shields.io/badge/Domain-Fraud%20Analytics-DC143C?style=for-the-badge)
 
 </p>
 
@@ -20,6 +20,7 @@
 ## Executive Summary
 
 > [!IMPORTANT]
+>
 > **1.29 Million Transactions Analyzed**
 >
 > **7,506 Fraudulent Transactions Identified**
@@ -28,24 +29,43 @@
 >
 > **Online Shopping Generated the Highest Fraud Exposure**
 >
-> **High-Risk Customers Showed ~60x Higher Fraud Rates**
+> **High-Risk Customers Showed a 23.34% Fraud Rate — ~63x Higher Than Low-Risk Customers**
 >
 > **Fraud Activity Peaked Between 22:00 and 03:00**
 
-| Metric                | Value               |
-| --------------------- | ------------------- |
-| Total Transactions    | **1,296,675**       |
-| Fraud Transactions    | **7,506**           |
-| Fraud Rate            | **0.58%**           |
-| Total Fraud Losses    | **$3.99 Million**   |
-| Highest Risk Category | **Online Shopping** |
-| Peak Fraud Window     | **22:00 – 03:00**   |
+| Metric                            | Value                                                 |
+| --------------------------------- | ----------------------------------------------------- |
+| Total Transactions                | **1,296,675**                                         |
+| Fraud Transactions                | **7,506**                                             |
+| Fraud Rate                        | **0.58%**                                             |
+| Total Fraud Losses                | **$3.99 Million**                                     |
+| Highest Risk Category             | **Online Shopping**                                   |
+| Peak Fraud Window                 | **22:00 – 03:00**                                     |
+| High-Value Transaction Fraud Rate | **23.34%** (vs. **0.24%** for transactions under $50) |
+
+---
+
+## Contents
+
+* [Live Dashboard](#live-dashboard)
+* [Project Overview](#project-overview)
+* [Dataset](#dataset)
+* [Tools & Technologies](#tools--technologies)
+* [Analytical Workflow](#analytical-workflow)
+* [Executive Dashboard](#executive-dashboard)
+* [Executive Findings](#executive-findings)
+* [Business Recommendations](#business-recommendations)
+* [Project Highlights](#project-highlights)
+* [Repository Structure](#repository-structure)
+* [Author](#author)
 
 ---
 
 ## Live Dashboard
 
-Tableau Public Dashboard:
+### Tableau Public Dashboard
+
+**View Interactive Dashboard**
 
 https://public.tableau.com/app/profile/rahul.tanwar8538/viz/Credit_Card_Fraud_Analysis_17815948901510/Dashboard1
 
@@ -55,7 +75,7 @@ https://public.tableau.com/app/profile/rahul.tanwar8538/viz/Credit_Card_Fraud_An
 
 Financial fraud remains one of the most significant challenges faced by banks, payment processors, and e-commerce platforms.
 
-This project analyzes more than **1.29 million credit card transactions** to identify fraud patterns, quantify financial losses, uncover high-risk customer behavior, and develop actionable business insights.
+This project analyzes more than **1.29 million credit card transactions** to identify fraud patterns, quantify financial losses, uncover high-risk customer behavior, and develop actionable, data-derived recommendations for fraud risk reduction.
 
 The project follows a complete analytics workflow:
 
@@ -63,17 +83,14 @@ The project follows a complete analytics workflow:
 
 The objective was to answer a fundamental business question:
 
-> Where does fraud occur, when does it occur, who is most vulnerable, and how can organizations reduce fraud exposure?
+> *Where does fraud occur, when does it occur, who is most vulnerable, and what specific controls would reduce exposure based on the patterns observed in this data?*
 
 ---
 
 ## Dataset
 
-**Source**
-
-https://www.kaggle.com/datasets/priyamchoksi/credit-card-transactions-dataset?utm_source=chatgpt.com
-
-### Dataset Characteristics
+**Source:**
+https://www.kaggle.com/datasets/kartik2112/fraud-detection
 
 | Metric             | Value             |
 | ------------------ | ----------------- |
@@ -102,25 +119,17 @@ https://www.kaggle.com/datasets/priyamchoksi/credit-card-transactions-dataset?ut
 
 ### Stage 1 — Exploratory Data Analysis (Python)
 
-The project began with Python-based exploratory analysis to understand:
+The project began with Python-based exploratory analysis to understand fraud distribution, transaction behavior, customer characteristics, merchant categories, transaction timing patterns, and financial exposure.
 
-* Fraud distribution
-* Transaction behavior
-* Customer characteristics
-* Merchant categories
-* Transaction timing patterns
-* Financial exposure
+**Key Activities**
 
-Key activities included:
+* Data cleaning and validation
+* Feature engineering (hour-of-day extraction, risk segment derivation, category grouping)
+* Fraud pattern identification across time and category
+* Statistical comparison of fraud vs. non-fraud transaction amounts
+* Visualization of distribution and outlier patterns
 
-* Data cleaning
-* Data validation
-* Feature engineering
-* Fraud pattern identification
-* Statistical analysis
-* Visualization
-
-The objective of this phase was to identify meaningful patterns and formulate analytical hypotheses.
+The objective of this phase was to identify meaningful patterns and formulate hypotheses to validate in SQL.
 
 ---
 
@@ -128,34 +137,35 @@ The objective of this phase was to identify meaningful patterns and formulate an
 
 Insights identified during exploratory analysis were validated and expanded through SQL.
 
-PostgreSQL was used to perform:
+**PostgreSQL was used to perform:**
 
-* Fraud rate calculations
-* Category-level analysis
-* Merchant-level analysis
-* Financial impact assessment
-* Risk segmentation
-* Transaction pattern analysis
-* Fraud trend analysis
+* Fraud rate calculations by category and hour
+* Merchant-level and category-level aggregation
+* Financial impact assessment (total and average fraud loss)
+* Risk segmentation by transaction value (Low Risk: under $50, Medium Risk: $50–$500, High Risk: over $500), revealing fraud concentration patterns by transaction size
+* Time-based fraud trend analysis
 
-This stage transformed exploratory findings into measurable business metrics.
+This stage transformed exploratory findings into measurable, query-verifiable business metrics.
 
 ---
 
 ### Stage 3 — Executive Dashboard (Tableau)
 
-The final stage involved developing an interactive dashboard for business stakeholders.
+The final stage involved developing an interactive dashboard for business stakeholders, focused on fraud exposure monitoring, category-level analysis, financial loss assessment, time-based activity, and risk segmentation.
 
-The dashboard focuses on:
+#### Fraud Amount Multiplier — Methodology
 
-* Fraud exposure monitoring
-* Category-level fraud analysis
-* Financial loss assessment
-* Time-based fraud activity
-* Risk segmentation
-* Fraud transaction multiplier analysis
+Transactions are segmented by value into:
 
-The objective was to provide a concise executive reporting solution for fraud monitoring and decision-making.
+* Low Risk (under $50)
+* Medium Risk ($50–$500)
+* High Risk (over $500)
+
+The multiplier is calculated as the ratio of the fraud rate in the High-Value tier to the fraud rate in the Low-Value tier:
+
+**23.34% ÷ 0.37% ≈ 63x**
+
+This shows that fraud is heavily concentrated in larger transactions rather than spread evenly across all transaction sizes, supporting value-based transaction monitoring over blanket controls.
 
 ---
 
@@ -169,9 +179,9 @@ The objective was to provide a concise executive reporting solution for fraud mo
 
 ## Executive Findings
 
-### Online Shopping Generates the Highest Fraud Losses
+### 1. Online Shopping Generates the Highest Fraud Losses
 
-Online shopping transactions generated approximately **$1.71 Million** in fraudulent losses, representing the largest financial exposure among all transaction categories.
+Online shopping transactions generated approximately **$1.71 Million** in fraudulent losses — **43% of total fraud exposure** — representing the largest financial loss among all transaction categories.
 
 <p align="center">
   <img src="images/Fraud_amt_by_category.png" width="90%">
@@ -179,9 +189,9 @@ Online shopping transactions generated approximately **$1.71 Million** in fraudu
 
 ---
 
-### Online Shopping Exhibits the Highest Fraud Rate
+### 2. Online Shopping Also Exhibits the Highest Fraud Rate
 
-Online transaction categories consistently demonstrate higher fraud rates than traditional transaction channels, indicating elevated exposure within digital commerce environments.
+At **1.76%**, Online Shopping's fraud rate is more than **triple** the average across all categories, indicating elevated exposure specific to digital commerce channels rather than transaction volume alone.
 
 <p align="center">
   <img src="images/Fraud_rate_by_category.png" width="90%">
@@ -189,9 +199,9 @@ Online transaction categories consistently demonstrate higher fraud rates than t
 
 ---
 
-### Fraud Activity Concentrates During Late-Night Hours
+### 3. Fraud Activity Concentrates During Late-Night Hours
 
-Fraud incidence rises significantly between **22:00 and 03:00**, suggesting elevated risk during low-supervision periods and potential automated attack activity.
+Fraud incidence rises to **2.84–2.88%** between **22:00 and 03:00** — roughly **5x** the daytime baseline rate — suggesting elevated risk during low-supervision periods consistent with automated or bot-driven attack patterns.
 
 <p align="center">
   <img src="images/Fraud_rate_by_hour.png" width="90%">
@@ -199,9 +209,11 @@ Fraud incidence rises significantly between **22:00 and 03:00**, suggesting elev
 
 ---
 
-### High-Risk Customers Exhibit Disproportionate Fraud Exposure
+### 4. Fraud Risk Is Heavily Concentrated in High-Value Transactions
 
-High-risk customers experience fraud at a rate approximately **60 times higher** than low-risk customers, highlighting a strong opportunity for targeted fraud controls.
+Transactions above **$500** show a **23.34% fraud rate** versus **0.24%** for transactions under **$50** — a **63x difference**.
+
+This indicates fraud risk scales sharply with transaction size, making value-based transaction monitoring significantly more efficient than uniform controls applied across all transaction amounts.
 
 <p align="center">
   <img src="images/Fraud_amt_multiplier.png" width="90%">
@@ -211,25 +223,26 @@ High-risk customers experience fraud at a rate approximately **60 times higher**
 
 ## Business Recommendations
 
-Based on the analysis, organizations should consider:
+Each recommendation below is tied directly to a finding from this analysis.
 
-* Enhancing monitoring for online shopping and digital transactions.
-* Implementing additional fraud controls during late-night transaction windows.
-* Applying risk-based authentication for high-risk customer segments.
-* Prioritizing investigations involving high-risk customers.
-* Developing category-specific fraud prevention strategies.
-* Deploying real-time monitoring for anomalous transaction behavior.
+| Finding                                                                                                     | Recommendation                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Online Shopping accounts for **43% of fraud losses** and the highest fraud rate (**1.76%**)                 | Apply step-up authentication (OTP/biometric) specifically on online/card-not-present transactions above a risk-adjusted threshold      |
+| Fraud rate spikes **5x** between **22:00–03:00**                                                            | Introduce time-based risk scoring that increases transaction friction or triggers manual review during this window                     |
+| High-Value transactions (**>$500**) show a **63x higher fraud rate** than Low-Value transactions (**<$50**) | Apply additional verification steps specifically for transactions above the $500 threshold, where fraud risk concentrates most heavily |
+| Grocery Stores and Online Services also show elevated fraud rates (**1.41%** and **1.45%**)                 | Extend category-specific monitoring rules beyond Online Shopping to these secondary risk categories                                    |
+| A small number of merchants account for a disproportionate share of fraud within each category              | Flag and prioritize manual review for the top 3 highest-fraud merchants identified per category                                        |
 
 ---
 
 ## Project Highlights
 
-* Analyzed **1.29 Million** credit card transactions.
-* Identified **$3.99 Million** in fraudulent transaction exposure.
-* Performed end-to-end analytics using **Python, PostgreSQL, and Tableau**.
-* Built an interactive fraud monitoring dashboard.
-* Conducted customer risk segmentation analysis.
-* Generated business-focused recommendations from analytical findings.
+* Analyzed **1.29 Million** credit card transactions end-to-end using **Python, PostgreSQL, and Tableau**
+* Identified **$3.99 Million** in fraudulent transaction exposure and isolated its primary drivers
+* Built a value-based risk segmentation framework quantifying a **63x fraud rate differential**
+* Ranked merchants within each category using **SQL Window Functions**
+* Designed an interactive executive dashboard for fraud monitoring and decision-making
+* Translated analytical findings into a prioritized, data-derived set of fraud control recommendations
 
 ---
 
@@ -263,13 +276,8 @@ credit-card-fraud-analysis
 
 **Rahul Tanwar**
 
-LinkedIn:
-
-https://www.linkedin.com/in/rahul-tanwar-b13439295
-
-Tableau Public:
-
-https://public.tableau.com/app/profile/rahul.tanwar8538
+* LinkedIn: https://www.linkedin.com/in/rahul-tanwar-b13439295
+* Tableau Public: https://public.tableau.com/app/profile/rahul.tanwar8538
 
 ---
 
